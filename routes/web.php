@@ -22,3 +22,19 @@ Route::get('tareas/{nombre?}', function($nombre = "usuario"){
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::resource('tarea', 'TareaController');
+
+
+/*
+Route::post('tarea', function () {
+    //Guardar a la DB
+
+});
+
+Route::get('tarea/{id}', function($id){
+    //$tarea = consultar tarea where id = $id
+
+    return view('tareas.tareaShow')->with(['tarea' => $tarea]);
+});
+*/

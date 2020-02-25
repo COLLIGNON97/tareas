@@ -13,7 +13,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
+                    <a href="{{action('TareaController@create')}}" class="btn btn-success btn-sm">Nueva tarea</a><hr>
                     You are logged in!
                 </div>
             </div>
