@@ -60,7 +60,7 @@ class TareaController extends Controller
      */
     public function show(Tarea $tarea)
     {
-        return redirect();//tarea [idex | show];
+        return view('tareas.tareaShow', compact('tarea'));//tarea [idex | show];
     }
 
     /**
@@ -71,7 +71,7 @@ class TareaController extends Controller
      */
     public function edit(Tarea $tarea)
     {
-        //
+        return view('tareas.tareaForm', compact('tarea'));
     }
 
     /**
@@ -83,7 +83,16 @@ class TareaController extends Controller
      */
     public function update(Request $request, Tarea $tarea)
     {
+        $tarea->nombre_tarea = $request->nombre_tarea;
+        $tarea->fecha_inicio = $request->fecha_inicio;
+        $tarea->fecha_termino = $request->fecha_termino;
+        $tarea->descripcion = $request->descripcion;
+        $tarea->prioridad = $request->prioridad;
+        $tarea->save();
+        //dd($tarea);
+        //dd($request->descripcion);
         //
+        return redirect()->route('tarea.show', $tarea->id);
     }
 
     /**
