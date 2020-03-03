@@ -8,39 +8,60 @@
                 <div class="card-header">Captuda de nueva tarea</div>
 
                 <div class="card-body">
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     @isset($tarea)
-                        <form action="{{action('TareaController@update', $tarea->id)}}" method="POST">
+                        {!! Form::model($tarea, ['route' => ['tarea.update', $tarea->id], 'method' => 'PATCH']) !!}
+                        {{-- <form action="{{action('TareaController@update', $tarea->id)}}" method="POST"> --}}
                         @method('PATCH')
                     @else
-                        <form action="{{action('TareaController@store')}}" method="POST">
+                        {!! Form::open(['route' => 'tarea.store']) !!}
+                        {{-- <form action="{{action('TareaController@store')}}" method="POST"> --}}
                     @endisset
                         @csrf
                         <div class="form-group">
-                            <label for="nombre_tarea">Tarea</label>
-                        <input type="text" class="form-control" id="nombre_tarea" name="nombre_tarea" rows="1" value="{{$tarea->nombre_tarea ?? ''}}"></textarea>
+                            {!! Form::label('nombre_tarea', 'Tarea') !!}
+                            <!-- <label for="nombre_tarea">Tarea</label> -->
+                            {!! Form::text('nombre_tarea', null, ['class' => 'form-control']) !!}
+                        {{-- <input type="text" class="form-control" id="nombre_tarea" name="nombre_tarea" rows="1" value="{{$tarea->nombre_tarea ?? ''}}"></textarea>--}}
                         </div>
                         <div class="form-group">
-                            <label for="fecha_inicio">Fecha Inicio</label>
-                            <input type="date" class="form-control" name="fecha_inicio" rows="1" value="{{$tarea->fecha_inicio ?? ''}}"></textarea>
+                            {!! Form::label('fecha_inicio', 'Fecha Inicio') !!}
+                            {{-- <label for="fecha_inicio">Fecha Inicio</label> --}}
+                            {!! Form::date('fecha_inicio', null, ['class' => 'form-control']) !!}
+                            {{-- <input type="date" class="form-control" name="fecha_inicio" rows="1" value="{{$tarea->fecha_inicio ?? ''}}"></textarea> --}}
                         </div>
                         <div class="form-group">
-                            <label for="fecha_termino">Fecha Fin</label>
-                            <input type="date" class="form-control" name="fecha_termino" rows="1" value="{{$tarea->fecha_termino ?? ''}}"></textarea>
+                            {!! Form::label('fecha_termino', 'Fecha Termino') !!}
+                            {{-- <label for="fecha_termino">Fecha Fin</label> --}}
+                            {!! Form::date('fecha_termino', null, ['class' => 'form-control']) !!}
+                            {{-- <input type="date" class="form-control" name="fecha_termino" rows="1" value="{{$tarea->fecha_termino ?? ''}}"></textarea> --}}
                         </div>
                         <div class="form-group">
-                            <label for="descripcion">Descripción</label>
-                            <textarea class="form-control" name="descripcion" rows="3">{{$tarea->descripcion ?? ''}}</textarea>
+                            {!! Form::label('descripcion', 'Descripción') !!}
+                            {{-- <label for="descripcion">Descripción</label> --}}
+                            {!! Form::textarea('descripcion', null, ['class' => 'form-control']) !!}
+                            {{-- <textarea class="form-control" name="descripcion" rows="3">{{$tarea->descripcion ?? ''}}</textarea> --}}
                         </div>
                         <div class="form-group">
-                            <label for="prioridad">Prioridad</label>
-                            <select name="prioridad" class="form-control" name="prioridad" rows="1">
+                            {!! Form::label('prioridad', 'Prioridad') !!}
+                            {{-- <label for="prioridad">Prioridad</label> --}}
+                            {!! Form::select('prioridad', ['1' => 'Baja','2' => 'Media', '3' => 'Alta'], null, ['class' => 'form-control']) !!}
+                            {{-- <select name="prioridad" class="form-control" name="prioridad" rows="1">
                                 <option value="1" {{ isset($tarea) && $tarea->prioridad == 1 ? 'selected' : ''}}>Baja (1)</option>
                                 <option value="2" {{ isset($tarea) && $tarea->prioridad == 1 ? 'selected' : ''}}>Media (2)</option>
                                 <option value="3" {{ isset($tarea) && $tarea->prioridad == 1 ? 'selected' : ''}}>Alta (3)</option>
-                            </select>
+                            </select> --}}
                         </div>
                         <button type="submit" class="btn btn-primary">Crear</button>
-                    </form>
+                    {!! Form::close() !!}
                 </div>
             </div>
         </div>

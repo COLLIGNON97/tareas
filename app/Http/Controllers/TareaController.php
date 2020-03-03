@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class TareaController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -39,7 +44,16 @@ class TareaController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'nombre_tarea' => 'required|max:225',
+            'fecha_inicio' => 'required|date',
+            'fecha_termino' => 'required|date',
+            'descripcion' => 'required|min:5',
+            'prioridad' => 'required|min:1|max:10'
+            ]);
+
         $tarea = new Tarea();
+        $tarea->user_id = \Auth::id();
         $tarea->nombre_tarea = $request->nombre_tarea;
         $tarea->fecha_inicio = $request->fecha_inicio;
         $tarea->fecha_termino = $request->fecha_termino;
@@ -83,6 +97,14 @@ class TareaController extends Controller
      */
     public function update(Request $request, Tarea $tarea)
     {
+        $request->validate([
+            'nombre_tarea' => 'required|max:255',
+            'fecha_inicio' => 'required|date',
+            'fecha_termino' => 'required|date',
+            'descripcion' => 'required',
+            'prioridad' => 'required|min:1|max:10'
+            ]);
+
         $tarea->nombre_tarea = $request->nombre_tarea;
         $tarea->fecha_inicio = $request->fecha_inicio;
         $tarea->fecha_termino = $request->fecha_termino;
@@ -103,6 +125,7 @@ class TareaController extends Controller
      */
     public function destroy(Tarea $tarea)
     {
-        //
+        $tarea->delete();
+        return redirect()->route('tarea.index');
     }
 }
