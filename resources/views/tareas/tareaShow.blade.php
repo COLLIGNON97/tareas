@@ -18,7 +18,7 @@
                     <form action="{{ route('tarea.destroy', $tarea->id)}}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Borrar </button>
+                        <button type="submit" class="btn btn-danger">Borrar </button><hr>
                     </form>
 
                     <table class="table">
@@ -32,9 +32,15 @@
                             <td>{{$tarea->id}}</td>
                             <td>{{$tarea->nombre_tarea}}</td>
                             <td>{{$tarea->descripcion}}</td>
-                            <td>{{$tarea->fecha_inicio}}</td>
-                            <td>{{$tarea->fecha_termino}}</td>
+                            <td>{{$tarea->fecha_inicio->format('d/m/y')}}</td>
+                            <td>{{$tarea->fecha_termino->format('d/m/y')}}</td>
                             <td>{{$tarea->prioridad}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="6">
+                                Usuario: {{$tarea->user->name}} ({{$tarea->user->email}}) <br>
+                                Categoría: {{$tarea->categoria->nombre_categoria}}
+                            </td>
                         </tr>
                     </table>
                 </div>

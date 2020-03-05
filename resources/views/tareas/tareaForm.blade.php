@@ -60,6 +60,16 @@
                                 <option value="3" {{ isset($tarea) && $tarea->prioridad == 1 ? 'selected' : ''}}>Alta (3)</option>
                             </select> --}}
                         </div>
+                        <div class="form-group">
+                            {!! Form::label('categoria', 'Categorías') !!}
+                            {{-- <label for="prioridad">Prioridad</label> --}}
+                            {!! Form::select('categoria_id', $categorias, null, ['class' => 'form-control']) !!}
+                            {{-- <select name="prioridad" class="form-control" name="prioridad" rows="1">
+                                <option value="1" {{ isset($tarea) && $tarea->prioridad == 1 ? 'selected' : ''}}>Baja (1)</option>
+                                <option value="2" {{ isset($tarea) && $tarea->prioridad == 1 ? 'selected' : ''}}>Media (2)</option>
+                                <option value="3" {{ isset($tarea) && $tarea->prioridad == 1 ? 'selected' : ''}}>Alta (3)</option>
+                            </select> --}}
+                        </div>
                         <button type="submit" class="btn btn-primary">Crear</button>
                     {!! Form::close() !!}
                 </div>
