@@ -35,13 +35,13 @@
                         <div class="form-group">
                             {!! Form::label('fecha_inicio', 'Fecha Inicio') !!}
                             {{-- <label for="fecha_inicio">Fecha Inicio</label> --}}
-                            {!! Form::date('fecha_inicio', null, ['class' => 'form-control']) !!}
+                            {!! Form::date('fecha_inicio', isset($tarea) ? $tarea->fecha_inicio->todateString() : null, ['class' => 'form-control']) !!}
                             {{-- <input type="date" class="form-control" name="fecha_inicio" rows="1" value="{{$tarea->fecha_inicio ?? ''}}"></textarea> --}}
                         </div>
                         <div class="form-group">
                             {!! Form::label('fecha_termino', 'Fecha Termino') !!}
                             {{-- <label for="fecha_termino">Fecha Fin</label> --}}
-                            {!! Form::date('fecha_termino', null, ['class' => 'form-control']) !!}
+                            {!! Form::date('fecha_termino', isset($tarea) ? $tarea->fecha_termino->todateString() :null, ['class' => 'form-control']) !!}
                             {{-- <input type="date" class="form-control" name="fecha_termino" rows="1" value="{{$tarea->fecha_termino ?? ''}}"></textarea> --}}
                         </div>
                         <div class="form-group">

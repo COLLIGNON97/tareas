@@ -55,6 +55,10 @@ class TareaController extends Controller
             'prioridad' => 'required|min:1|max:10'
             ]);
 
+        $request->merge(['user_id' => \Auth::id()]);
+        //dd($request->all());
+        Tarea::create($request->all()); //recibe un arreglo del nombre de la columna y el valor de la columna
+        /*
         $tarea = new Tarea();
         $tarea->user_id = \Auth::id();
         $tarea->categoria_id = $request->categoria_id;
@@ -66,7 +70,7 @@ class TareaController extends Controller
         $tarea->save();
         //dd($tarea);
         //dd($request->descripcion);
-        //
+        */
         return redirect()->route('tarea.index');
     }
 
@@ -110,6 +114,10 @@ class TareaController extends Controller
             'prioridad' => 'required|min:1|max:10'
             ]);
 
+        //$request->merge(['user_id' => \Auth::id()]);
+        //dd($request->all());
+        Tarea::where('id', $tarea->id)->update($request->except('_token', '_method'));
+        /*
         $tarea->categoria_id = $request->categoria_id; ##################################################################
         $tarea->nombre_tarea = $request->nombre_tarea;
         $tarea->fecha_inicio = $request->fecha_inicio;
@@ -119,7 +127,7 @@ class TareaController extends Controller
         $tarea->save();
         //dd($tarea);
         //dd($request->descripcion);
-        //
+        */
         return redirect()->route('tarea.show', $tarea->id);
     }
 

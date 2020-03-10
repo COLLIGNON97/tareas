@@ -16,8 +16,6 @@ class CategoriasTableSeeder extends Seeder
         DB::table('categorias')->insert(['nombre_categoria' => 'Personal']);
         DB::table('categorias')->insert(['nombre_categoria' => 'Escuela']);
 
-        /*Categoria::create([
-            'nombre_categoria' => 'Personal'
-        ]);*/
+        Categoria::create(['nombre_categoria' => 'Trabajo'],['nombre_categoria' => 'Division']);
     }
 }
